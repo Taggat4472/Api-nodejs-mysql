@@ -26,4 +26,6 @@ db.sequelize = sequelize;
 // Connexion aux models
 db.product = require("./product.model.js")(sequelize, DataTypes);
 
+
+
 module.exports = db;
