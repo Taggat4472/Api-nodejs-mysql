@@ -18,6 +18,9 @@ app.get("/", (req, res) => {
     res.json({ message: "Bonjour ! 👋." });
   });
  
+// API routes
+require("./app/routes/product.routes")(app);
+
   // Port
 const PORT = 3001;
 app.listen(PORT, () => {
