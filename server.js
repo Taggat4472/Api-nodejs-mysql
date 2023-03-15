@@ -25,8 +25,9 @@ app.get("/", (req, res) => {
  
 // API routes
 require("./app/routes/product.routes")(app);
-
-  // Port
+require("./app/routes/auth.routes")(app);
+ 
+// Port
 const PORT = 3001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
