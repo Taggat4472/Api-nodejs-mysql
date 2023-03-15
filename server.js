@@ -2,6 +2,11 @@ const express = require("express");
 
 const app = express();
 
+// parse requests of content-type - application/json
+app.use(express.json());// body parser
+// parse requests of content-type - application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
+
 // connexion mariaDB
 const db = require("./app/models");
 
