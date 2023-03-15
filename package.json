@@ -1,0 +1,26 @@
+{
+  "name": "api-nodejs-mysql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon -r dotenv/config server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Taggat4472/Api-nodejs-mysql.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Taggat4472/Api-nodejs-mysql/issues"
+  },
+  "homepage": "https://github.com/Taggat4472/Api-nodejs-mysql#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mariadb": "^3.1.0",
+    "sequelize": "^6.29.3"
+  }
+}
