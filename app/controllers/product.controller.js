@@ -2,76 +2,35 @@ const db = require("../models/index");
 const Product = db.product;
 const Op = db.Sequelize.Op;
 
-// multer 
-const fs = require("fs");
-const {uploadFile} = require("../middlewares");
-
 // Ajouter un nouveau produit
 exports.create = async (req, res) => {
   try {
     console.log("image", req.file);
-    if (req.file == undefined) {
-      return res.status(400).send({ message: "Please upload a file!" });
-     }
- 
-     // Récupère le formulaire
-     const product = {
-       name: req.body.name,
-       price: req.body.price,
-       filename: req.file.originalname,
-       filepath: fs.readFileSync(
-         __basedir + "/uploads/" + req.file.filename
-       ),
-       published: req.body.published ? req.body.published : false
-     };
-     console.log("product", product);
- 
-     // Ajoute le produit dans la BDD
-     Product
-       .create(product)
-       .then(image => {
-         fs.writeFileSync(
-           __basedir + "/uploads/" + image.name,
-           image.data
-         );
-         return res.send(`File has been uploaded.`);
-       });
-     }
-       catch(err) {
-         res.status(500).send({
-           message: err.message || "Some error occurred while creating the Product."
-         });
-       };
- 
-  /*
-  // Validate request
-  if (!req.body.name) {
-    res.status(400).send({
-      message: "Content can not be empty!"
+    const { name, price, published } = req.body;
+  
+    const newProduct = {
+                          name,
+                          price,
+                          published,
+                          filename: req.file.originalname,
+                          filepath: req.file.path,
+                          filetype: req.file.mimetype,
+                          filesize: req.file.size,
+                        };
+   
+    const saveNewProduct = await Product.create(newProduct);
+    if (saveNewProduct) res.json({ 
+      message: 'Ajout avec succès', 
+      success: 1,
+      profile_url: `http://localhost:${process.env.PORT}/uploads/images/${req.file.filename}`
     });
-    return;
+  }
+  catch (error) {
+    res.status(500).send({
+      message: error.message || "Some error occurred while creating the Product."
+    });
   }
 
-  // Récupère le formulaire
-  const product = {
-    name: req.body.name,
-    price: req.body.price,
-    published: req.body.published ? req.body.published : false
-  };
-  console.log("product", product);
-
-  // Ajoute le produit dans la BDD
-  Product.create(product)
-    .then(data => {
-      res.send(data);
-
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while creating the Product."
-      });
-    });
-    */
 };
 
 // Affiche tous les produits
