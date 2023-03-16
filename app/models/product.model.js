@@ -15,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
         price: {
           type: DataTypes.INTEGER
         },
+        filename: {
+          type: DataTypes.STRING
+        },
+        filepath: {
+          type: DataTypes.BLOB("long")
+        },
         // En stock
         published: {
           type: DataTypes.BOOLEAN
