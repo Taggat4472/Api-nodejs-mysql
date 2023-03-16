@@ -1,5 +1,6 @@
 const verifySignUp = require("./verifySignUp");
-
+const uploadFile = require("./uploadFile")
 module.exports = {
-  verifySignUp
+    uploadFile,
+    verifySignUp
 };

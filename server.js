@@ -7,6 +7,12 @@ app.use(express.json());// body parser
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 
+// Créer une variable globale
+global.__basedir = __dirname;
+
+// Déclaration du dossier "uploads" comme dossier statique
+app.use('/uploads', express.static('uploads'));
+
 // connexion mariaDB
 const db = require("./app/models");
 
